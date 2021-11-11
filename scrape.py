@@ -19,7 +19,6 @@ def request(url):
         "User-Agent": r"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.1023"
     }
     response = requests.get(url, headers=req_headers).text
-
     return response
 
 def parse(res):
