@@ -7,11 +7,11 @@ with open('test.html', "r") as file:
     doc = BeautifulSoup(file, "html.parser")
 
 
-'''
-Can use the doc class with dot notation to access any tag from the html document.
-'''
-tag = doc.title
+# Can use the doc class with dot notation to access any tag from the html document.'''
+tag = doc.div
 
-print(tag) 
+# To access the string that's contained within the tag, 
+
+print(tag)
 
 # print(doc.prettify())
