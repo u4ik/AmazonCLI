@@ -76,8 +76,38 @@ def make_request(url):
 # ? Using requests module
 body = BeautifulSoup(make_requests(multipleItemsUrl).text, "html.parser")
 title = body.title.string
-prices = body.find_all("span", class_="a-offscreen")
-# prices = body.find_all("span", class_="a-price-whole")
+# prices = body.find_all("span", class_="a-offscreen")
+# priceWrap = body.find_all(class_="a-section a-spacing-none a-spacing-top-small")
+priceWrap = body.find_all('a',class_="a-size-base a-link-normal a-text-normal")
+# priceWrap = body.find_all(class_="a-price")
+
+# print(priceWrap[0].findChildren("span", class_="a-offscreen", recursive=True))
+
+
+
+prices= []
+for i in range(len(priceWrap)):
+    tmp1 =  priceWrap[i].findChildren("span", class_="a-price", attrs={"data-a-size" : "l", "data-a-color": "base"},recursive=True)
+    for i in range(len(tmp1)):
+        tmp2 = tmp1[i].findChildren("span", class_="a-offscreen", recursive=True)
+        for i in range(len(tmp2)):
+
+            prices.append(tmp2[i])
+    # print(tmp2)
+
+
+# for i in range(len(tmp1)):
+    # print(tmp1[0].findChildren(""))
+    # tmp2.append(tmp1[i].find("span", class_="a-price", recursive=True))
+
+    # res = tmp[i].findChildren("span", class_="a-whole-price", recursive=True)
+    # for i in res:
+    #     prices.append(i.text)
+
+    # p = res.text
+
+
+# parent = prices[0].parent
 descs = body.find_all("span", class_="a-size-medium a-color-base a-text-normal")
 
 holder = {}
@@ -85,13 +115,14 @@ holder = {}
 print(f'Prices: Amount {len(prices)}')
 print(f'Desc: Amount {len(descs)}')
 
+# print(prices)
 
+# TODO Prices solved, now need to store the results
 for i in range(len(descs)):
-    # print(i,descs[i].string)
     holder[i] = {descs[i].string}
   
 for i in range(len(prices)):
-
+    # print(i,prices[i])
     if i <= len(holder) - 1:
         print(holder[i])
         print(prices[i].text)
