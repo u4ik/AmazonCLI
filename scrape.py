@@ -1,7 +1,6 @@
+from os import write
 from pprint import pprint
-
 import requests
-from urllib import request
 from bs4 import BeautifulSoup
 
 # ? _________________________________
@@ -47,90 +46,65 @@ foundTags = doc.find_all('div')[0]
 
 # singleItemUrl = 'https://www.amazon.com/Playstation-Console-Ultra-High-Bluetooth-Blu-ray/dp/B09KN38HFR/'
 
+# Check for PS5 on amazon
 
 
 # result = requests.get(url)
 
 def start():
-    multipleItemsUrl = f'https://www.amazon.com/s?k={q}'
+    q = input("Search Amazon For:")
+    s_url = f'https://www.amazon.com/s?k={q}'
+    res = request(s_url)
 
-    def make_requests(url, q):
-        req_headers = {
-            "Content-Type": "text/plain; charset=utf-8",
-            "User-Agent": r"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.1023"
-        }
-        response = requests.get(url, headers=req_headers)
-        return response
+    parse(res)
+
+    write()
 
 
+def request(url):
+    req_headers = {
+        "Content-Type": "text/plain; charset=utf-8",
+        "User-Agent": r"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.1023"
+    }
+    response = requests.get(url, headers=req_headers)
+    return response
 
+def parse(res):
+    c_d={}
+    body = BeautifulSoup(res.text, "html.parser")
+    priceWrap = body.find_all(
+        'a', class_="a-size-base a-link-normal a-text-normal")
+    print(priceWrap)
 
+    prices = []
+    for i in range(len(priceWrap)):
+        tmp1 = priceWrap[i].findChildren(
+            "span", class_="a-price", attrs={"data-a-size": "l", "data-a-color": "base"}, recursive=True)
+        for i in range(len(tmp1)):
+            tmp2 = tmp1[i].findChildren(
+                "span", class_="a-offscreen", recursive=True)
+            for i in range(len(tmp2)):
+                prices.append(tmp2[i])
 
+        # ? Using requests module
 
+        descs = body.find_all(
+            "span", class_="a-size-medium a-color-base a-text-normal")
 
-# ? Using request module from urllib
-# body = BeautifulSoup(make_requests(url).text, "html.parser")
+        print(f'Prices: Amount {len(prices)}')
+        print(f'Desc: Amount {len(descs)}')
 
+        for i in range(len(descs)):
+            c_d[i] = {descs[i].string}
 
+        for i in range(len(prices)):
+            # print(i,prices[i])
+            if i <= len(c_d) - 1:
+                print(c_d[i])
+                print(prices[i].text)
 
-# ? Using requests module
-body = BeautifulSoup(make_requests(multipleItemsUrl).text, "html.parser")
-title = body.title.string
-# prices = body.find_all("span", class_="a-offscreen")
-# priceWrap = body.find_all(class_="a-section a-spacing-none a-spacing-top-small")
-priceWrap = body.find_all('a',class_="a-size-base a-link-normal a-text-normal")
-# priceWrap = body.find_all(class_="a-price")
+        # pprint(holder)
 
-# print(priceWrap[0].findChildren("span", class_="a-offscreen", recursive=True))
-
-
-
-
-
-
-
-
-
-prices= []
-for i in range(len(priceWrap)):
-    tmp1 =  priceWrap[i].findChildren("span", class_="a-price", attrs={"data-a-size" : "l", "data-a-color": "base"},recursive=True)
-    for i in range(len(tmp1)):
-        tmp2 = tmp1[i].findChildren("span", class_="a-offscreen", recursive=True)
-        for i in range(len(tmp2)):
-
-            prices.append(tmp2[i])
-
-
-
-
-
-
-
-descs = body.find_all("span", class_="a-size-medium a-color-base a-text-normal")
-
-holder = {}
-
-print(f'Prices: Amount {len(prices)}')
-print(f'Desc: Amount {len(descs)}')
-
-
-
-
-for i in range(len(descs)):
-    holder[i] = {descs[i].string}
-  
-for i in range(len(prices)):
-    # print(i,prices[i])
-    if i <= len(holder) - 1:
-        print(holder[i])
-        print(prices[i].text)
-
-
-
-# pprint(holder)
-
-
-def writeFile():
+def write():
     with open('ps5-amazon.html', "w") as file:
         file.write(priceWrap)
-
