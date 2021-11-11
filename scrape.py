@@ -105,7 +105,7 @@ def parse(res):
             # print(p[i].text)
             # print('')
     pprint(f'Results: {len(c_d)}')
-    pprint(c_d)
+    # pprint(c_d)
     return c_d
 
 def write(f):
