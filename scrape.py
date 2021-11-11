@@ -1,3 +1,7 @@
+from pprint import pprint
+
+import requests
+from urllib import request
 from bs4 import BeautifulSoup
 
 # ? _________________________________
@@ -40,36 +44,29 @@ foundTags = doc.find_all('div')[0]
 # * Check the price of an item on Amazon
 # ? _________________________________
 
-from urllib import request
-import requests
+singleItemUrl = 'https://www.amazon.com/Playstation-Console-Ultra-High-Bluetooth-Blu-ray/dp/B09KN38HFR/'
 
-url = 'https://www.amazon.com/Playstation-Console-Ultra-High-Bluetooth-Blu-ray/dp/B09KN38HFR/'
-import pprint
+# Check for PS5 on amazon
+multipleItemsUrl = 'https://www.amazon.com/s?k=ps5'
+
 # result = requests.get(url)
 
 def make_requests(url):
-
     req_headers = {
         "Content-Type": "text/plain; charset=utf-8",
         "User-Agent": r"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.1023"
     }
     req = requests.get(url, headers=req_headers)
-
     return req
 
 def make_request(url):
-
     req_headers = {
         "Content-Type": "text/plain; charset=utf-8",
         "User-Agent": r"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.1023"
     }
-
     req = request.Request(str(url))
-
     for header in req_headers:
         req.add_header(header, req_headers[header])
-
-
     body = request.urlopen(req, None, 300).read().decode("utf-8")
     return body
 
@@ -77,6 +74,31 @@ def make_request(url):
 # body = BeautifulSoup(make_requests(url).text, "html.parser")
 
 # ? Using requests module
-body = BeautifulSoup(make_requests(url).text, "html.parser")
-# print(body.prettify())
-print(body.title.string)
+body = BeautifulSoup(make_requests(multipleItemsUrl).text, "html.parser")
+title = body.title.string
+prices = body.find_all("span", class_="a-offscreen")
+# prices = body.find_all("span", class_="a-price-whole")
+descs = body.find_all("span", class_="a-size-medium a-color-base a-text-normal")
+
+holder = {}
+
+print(f'Prices: Amount {len(prices)}')
+print(f'Desc: Amount {len(descs)}')
+
+
+for i in range(len(descs)):
+    # print(i,descs[i].string)
+    holder[i] = {descs[i].string}
+  
+for i in range(len(prices)):
+
+    if i <= len(holder) - 1:
+        print(holder[i])
+        print(prices[i].text)
+
+# holder[i] = {"price": prices[i].string,**holder[i]}
+# holder[i] = {"price": prices[i].string}
+
+# pprint(holder)
+
+
