@@ -58,17 +58,17 @@ def start():
 
 def request(url):
 
-
-
     req_headers = {
         "Content-Type": "text/plain; charset=utf-8",
         "User-Agent": r"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.1023"
     }
     response = requests.get(url, headers=req_headers)
     return response
+
+
 def parse(res):
 
-    c_d={}
+    c_d = {}
     b = BeautifulSoup(res.text, "html.parser")
     priceWrap = b.find_all(
         'a', class_="a-size-base a-link-normal a-text-normal")
@@ -85,12 +85,12 @@ def parse(res):
             for i in range(len(tmp2)):
                 prices.append(tmp2[i])
 
-        descs = b.find_all(
-            "span", class_="a-size-medium a-color-base a-text-normal")
+    descs = b.find_all(
+        "span", class_="a-size-medium a-color-base a-text-normal")
 
-        print(f'Prices: Amount {len(prices)}')
-        print(f'Desc: Amount {len(descs)}')
-        print(prices)
+    print(f'Prices: Amount {len(prices)}')
+    print(f'Desc: Amount {len(descs)}')
+    print(prices)
 
     for i in range(len(descs)):
         c_d[i] = {descs[i].string}
@@ -102,6 +102,8 @@ def parse(res):
             print(prices[i].text)
 
     return c_d
+
+
 def write(f):
     with open('ps5-amazon.html', "w") as file:
         file.write(f)
