@@ -79,4 +79,4 @@ def make_request(url):
 # ? Using requests module
 body = BeautifulSoup(make_requests(url).text, "html.parser")
 # print(body.prettify())
-print(body.title)
+print(body.title.string)
