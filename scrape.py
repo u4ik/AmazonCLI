@@ -7,11 +7,11 @@ def start():
     q = input("Search Amazon For: ")
     # q = 'ps5'
     s_url = f'https://www.amazon.com/s?k={q}'
-    res = request(s_url)
+    resp = request(s_url)
     # write(str(parse(res)))
-    result = parse(res)
-    pprint(f'Results: {len(result)}')
-    pprint(result)
+    res = parse(resp)
+    pprint(f'Results: {len(res)}')
+    pprint(res)
 
 def request(url):
     req_headers = {
@@ -34,7 +34,6 @@ def parse(res):
     # print(p_wrap.encode("utf-8"))
     write(str(p_wrap))
     p = []
-
     for i in range(len(p_wrap)):
         tmp1 = p_wrap[i].findChildren(
             "span", class_="a-price", attrs={"data-a-size": "l", "data-a-color": "base"}, recursive=True)
@@ -43,13 +42,10 @@ def parse(res):
                 "span", class_="a-offscreen", recursive=True)
             for j in range(len(tmp2)):
                 p.append(tmp2[j])
-
     descs = b.find_all(
         "span", class_="a-size-medium a-color-base a-text-normal")
-
     print(f'Prices: Amount {len(p)}')
     print(f'Desc: Amount {len(descs)}')
-
     for i in range(len(descs)):
         c_d[i] = {'Desc':descs[i].string}
     for i in range(len(p)):
