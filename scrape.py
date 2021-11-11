@@ -48,65 +48,68 @@ foundTags = doc.find_all('div')[0]
 
 
 def start():
-    # q = input("Search Amazon For:")
-    q = 'ps5'
+    q = input("Search Amazon For: ")
+    # q = 'ps5'
     s_url = f'https://www.amazon.com/s?k={q}'
     res = request(s_url)
     # write(str(parse(res)))
     parse(res)
 
-
 def request(url):
-
     req_headers = {
         "Content-Type": "text/plain; charset=utf-8",
         "User-Agent": r"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.1023"
     }
-    response = requests.get(url, headers=req_headers)
+    response = requests.get(url, headers=req_headers).text
+
     return response
 
-
 def parse(res):
-
     c_d = {}
-    b = BeautifulSoup(res.text, "html.parser")
-    priceWrap = b.find_all(
+    b = BeautifulSoup(res, "html.parser")
+    # old
+    pWrap = b.find_all(
         'a', class_="a-size-base a-link-normal a-text-normal")
 
-    print(priceWrap)
-    write(str(priceWrap))
-    prices = []
-    for i in range(len(priceWrap)):
-        tmp1 = priceWrap[i].findChildren(
+
+# testing
+    # pWrap = b.findChildren('div', class_='s-result-item s-asin sg-col-0-of-12 sg-col-16-of-20 AdHolder sg-col s-widget-spacing-small sg-col-12-of-16')
+
+    # print(pWrap.encode("utf-8"))
+    # write(str(pWrap))
+    '''Write the results'''
+    p = []
+
+    for i in range(len(pWrap)):
+        tmp1 = pWrap[i].findChildren(
             "span", class_="a-price", attrs={"data-a-size": "l", "data-a-color": "base"}, recursive=True)
-        for i in range(len(tmp1)):
-            tmp2 = tmp1[i].findChildren(
+        for k in range(len(tmp1)):
+            tmp2 = tmp1[k].findChildren(
                 "span", class_="a-offscreen", recursive=True)
-            for i in range(len(tmp2)):
-                prices.append(tmp2[i])
+            for j in range(len(tmp2)):
+                p.append(tmp2[j])
 
     descs = b.find_all(
         "span", class_="a-size-medium a-color-base a-text-normal")
 
-    print(f'Prices: Amount {len(prices)}')
-    print(f'Desc: Amount {len(descs)}')
-    print(prices)
+    # print(f'Prices: Amount {len(p)}')
+    # print(f'Desc: Amount {len(descs)}')
 
     for i in range(len(descs)):
-        c_d[i] = {descs[i].string}
-
-    for i in range(len(prices)):
-        # print(i,prices[i])
+        c_d[i] = {'Desc':descs[i].string}
+    for i in range(len(p)):
+        # print(i,p[i])
         if i <= len(c_d) - 1:
+            c_d[i]['Price'] = p[i].text 
             # print(c_d[i])
-            print(prices[i].text)
-
+            # print(p[i].text)
+            # print('')
+    pprint(f'Results: {len(c_d)}')
+    pprint(c_d)
     return c_d
 
-
 def write(f):
-    with open('ps5-amazon.html', "w") as file:
+    with open('results.html', "w") as file:
         file.write(f)
-
-
 start()
+
