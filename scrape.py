@@ -69,12 +69,12 @@ def request(url):
 def parse(res):
 
     c_d={}
-    body = BeautifulSoup(res.text, "html.parser")
-    priceWrap = body.find_all(
+    b = BeautifulSoup(res.text, "html.parser")
+    priceWrap = b.find_all(
         'a', class_="a-size-base a-link-normal a-text-normal")
 
     print(priceWrap)
-    # write(str(priceWrap))
+    write(str(priceWrap))
     prices = []
     for i in range(len(priceWrap)):
         tmp1 = priceWrap[i].findChildren(
@@ -85,23 +85,21 @@ def parse(res):
             for i in range(len(tmp2)):
                 prices.append(tmp2[i])
 
-      
-
-        descs = body.find_all(
+        descs = b.find_all(
             "span", class_="a-size-medium a-color-base a-text-normal")
 
         print(f'Prices: Amount {len(prices)}')
         print(f'Desc: Amount {len(descs)}')
         print(prices)
 
-        for i in range(len(descs)):
-            c_d[i] = {descs[i].string}
+    for i in range(len(descs)):
+        c_d[i] = {descs[i].string}
 
-        for i in range(len(prices)):
-            # print(i,prices[i])
-            if i <= len(c_d) - 1:
-                # print(c_d[i])
-                print(prices[i].text)
+    for i in range(len(prices)):
+        # print(i,prices[i])
+        if i <= len(c_d) - 1:
+            # print(c_d[i])
+            print(prices[i].text)
 
     return c_d
 def write(f):
