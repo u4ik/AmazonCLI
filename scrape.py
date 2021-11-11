@@ -45,20 +45,27 @@ foundTags = doc.find_all('div')[0]
 # * Check the price of an item on Amazon
 # ? _________________________________
 
-singleItemUrl = 'https://www.amazon.com/Playstation-Console-Ultra-High-Bluetooth-Blu-ray/dp/B09KN38HFR/'
+# singleItemUrl = 'https://www.amazon.com/Playstation-Console-Ultra-High-Bluetooth-Blu-ray/dp/B09KN38HFR/'
 
-# Check for PS5 on amazon
-multipleItemsUrl = 'https://www.amazon.com/s?k=ps5'
+
 
 # result = requests.get(url)
 
-def make_requests(url):
-    req_headers = {
-        "Content-Type": "text/plain; charset=utf-8",
-        "User-Agent": r"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.1023"
-    }
-    response = requests.get(url, headers=req_headers)
-    return response
+def start():
+    multipleItemsUrl = f'https://www.amazon.com/s?k={q}'
+
+    def make_requests(url, q):
+        req_headers = {
+            "Content-Type": "text/plain; charset=utf-8",
+            "User-Agent": r"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.1023"
+        }
+        response = requests.get(url, headers=req_headers)
+        return response
+
+
+
+
+
 
 
 # ? Using request module from urllib
