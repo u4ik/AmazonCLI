@@ -12,6 +12,10 @@ tag = doc.title
 # To access the string that's contained within the tag. Which in this example would result in 'Document', the text between the title tag.
 print(tag.string)
 
+# You can modify the string within tags as well:
+tag.string = 'something else'
+print(tag)
+
 
 
 
