@@ -1,7 +1,7 @@
+from bs4 import BeautifulSoup
 from os import write
 from pprint import pprint
 import requests
-from bs4 import BeautifulSoup
 
 def start():
     q = input("Search Amazon For: ")
