@@ -163,7 +163,7 @@ def parse(res):
 
 
 def write(f):
-    with open('results.json', "w", encoding='utf-8') as fl:
+    with open(f'{os.path.dirname(__file__)}/results.json', "w", encoding='utf-8') as fl:
         fl.write(f)
 
 
