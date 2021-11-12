@@ -1,10 +1,12 @@
 
 from bs4 import BeautifulSoup
 from os import write
+import os
 from pprint import pprint
 import requests
 import re
 from InquirerPy import prompt
+import itertools   
 
 def start():
     header = '\033[95m'
@@ -23,7 +25,9 @@ def start():
     def okaylabel(s):
         return f"{header + BOLD + OKGREEN}  {s}  {ENDC}"
     def okayblue(s):
-        return f"{header + BOLD + BLUE}  {s}  {ENDC}"
+        return f"{header + BOLD + BLUE}  {s} {ENDC} "
+    def okaycyan(s):
+        return f"{header + BOLD }  {s} {ENDC} "
 
     try:
         q = input(label("Search Amazon For:"))
@@ -77,7 +81,17 @@ def start():
             if output:
                 write(str(sorted_c_d))
             print(okaylabel(f'{len(sorted_c_d)} Results'))
-            pprint(okayblue(sorted_c_d))
+            # okayblue(' ')
+            # pprint(sorted_c_d)
+            for i in sorted_c_d:
+                size = os.get_terminal_size()
+                columns = size.columns
+                print(okaylabel("-" * columns))
+                print(okayblue(i['Desc']))
+                print(okaycyan(i['Arrival']))
+                print(okaylabel(i['Price']))
+                print(label(i['Image']))
+                print(label(i['Link']))
         else:
             return
     except(KeyboardInterrupt) as e:
@@ -95,9 +109,9 @@ def request(url):
 
 def sort_price(flag, res):
     if flag == "h":
-        return sorted(res, key=lambda x: x['Price_Val:'], reverse=True)
+        return sorted(res, key=lambda x: x['Price_Val'], reverse=True)
     else:
-        return sorted(res, key=lambda x: x['Price_Val:'])
+        return sorted(res, key=lambda x: x['Price_Val'])
 
 
 def parse(res):
@@ -136,10 +150,10 @@ def parse(res):
                         'Desc': l.h2.text,
                         'Price': i.string,
                         'Arrival': arrival_date.string if arrival_date else "----",
-                        'Price_Val:': int(
+                        'Price_Val': int(
                             i.string.replace("$", "").replace(".", "").replace(",", "")[:-2]),
-                        'Image:': img_url,
-                        'Link:' : link_url
+                        'Image': img_url,
+                        'Link' : link_url
                     }
                     c_d.append(o)
                     c += 1
