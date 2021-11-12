@@ -28,15 +28,18 @@ def start():
             "message": "Save output file? (results.json):", "name": "output"},
         {"type": "confirm", "message": "Confirm?", "name": "confirm"},
     ]
-    
+
 
     res = parse(resp)
 
-    sorted_arr = sorted(res.items(), key=lambda x: x[1]['Price_Val:'])
+    sorted_arr = sorted(res, key=res.get('Price_Val:'))
+    # sorted_arr = sorted(res.items(), key=lambda x: x[1]['Price_Val:'])
     
+
     for i in sorted_arr:
-        idx, obj = i 
-        sorted_c_d[idx] = ''
+        print(i)
+        # sorted_c_d[i] = k
+
         # sorted_c_d[i[0]] = {i[1]['Price_Val:']}
         # sorted_c_d[i[0]] = {"Desc:":i[1]['Desc:']}
         # sorted_c_d[i[0]]['Price:'] = i[1]['Price_Val:']
@@ -45,6 +48,7 @@ def start():
         # print(i[1]['Desc:'])
         # print(i[1]['Price:'])
         # print(i[1]['Price_Val:'])
+
     pprint(sorted_c_d)
 
     # sort_items = sorted(res.items(), key=lambda x: (x[2]['Price_Val']))
