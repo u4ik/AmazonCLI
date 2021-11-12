@@ -10,10 +10,11 @@ def start():
     header = '\033[95m'
     ENDC = '\033[0m'
     BOLD = '\033[1m'
-    OKBLUE = '\033[96m'
+    OKCYAN = '\033[96m'
     OKGREEN = '\033[92m'
     WARNING = '\033[91m'
     UNDERLINE = '\033[4m'
+    BLUE = '\033[94m'
 
     def label(s):
         return f"{BOLD}  {s}  {ENDC}"
@@ -21,6 +22,8 @@ def start():
         return f"{header + BOLD + WARNING}  {s}  {ENDC}"
     def okaylabel(s):
         return f"{header + BOLD + OKGREEN}  {s}  {ENDC}"
+    def okayblue(s):
+        return f"{header + BOLD + BLUE}  {s}  {ENDC}"
 
     try:
         q = input(label("Search Amazon For:"))
@@ -74,7 +77,7 @@ def start():
             if output:
                 write(str(sorted_c_d))
             print(okaylabel(f'{len(sorted_c_d)} Results'))
-            pprint(sorted_c_d)
+            pprint(okayblue(sorted_c_d))
         else:
             return
     except(KeyboardInterrupt) as e:
