@@ -18,5 +18,5 @@
 
 <p>Logged results.</p>
 <img src='https://i.ibb.co/rmn1vnq/results.png'/>
-<p>Saved results in <b>results.json</b>file.</p>
-<img src='https://i.ibb.co/gWYFvwt/resultsjson.png'/>
+<!-- <p>Saved results in <b>results.json</b>file.</p>
+<img src='https://i.ibb.co/gWYFvwt/resultsjson.png'/> -->
