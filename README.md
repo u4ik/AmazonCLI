@@ -19,5 +19,5 @@
 
 <p>Results will be logged.</p>
 <img src='https://i.ibb.co/cwsxZ6v/results.png'/>
-<p>Saved results in <b>results.json</b> file.</p>
+<p>Saved results in <b>results.json</b>file.</p>
 <img src='https://i.ibb.co/hR4Qdf1/resultsjson.png'/>

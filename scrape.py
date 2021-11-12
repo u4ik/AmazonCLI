@@ -1,3 +1,4 @@
+
 from bs4 import BeautifulSoup
 from os import write
 from pprint import pprint
@@ -6,23 +7,38 @@ import re
 from InquirerPy import prompt
 
 def start():
+    header = '\033[95m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    OKBLUE = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[91m'
+    UNDERLINE = '\033[4m'
+
+    def label(s):
+        return f"{BOLD}  {s}  {ENDC}"
+    def warnlabel(s):
+        return f"{header + BOLD + WARNING}  {s}  {ENDC}"
+    def okaylabel(s):
+        return f"{header + BOLD + OKGREEN}  {s}  {ENDC}"
+
     try:
-        q = input("Search Amazon For: ")        
-        while( len(q) == 0):
-            print('Enter a search term!')
-            q = input("Search Amazon For: ")
+        q = input(label("Search Amazon For:"))
+        while(len(q) == 0):
+            print(warnlabel('Enter a search term!'))
+            q = input(label("Search Amazon For: "))
             if len(q) > 0:
                 break
-        m_p = input("Min Price: ")
-        while( len(m_p) == 0):
-            print('Enter a minimum price!')
-            m_p = input("Min Price: ")
+        m_p = input(label("Min Price: "))
+        while(len(m_p) == 0):
+            print(warnlabel('Enter a minimum price!'))
+            m_p = input(label("Min Price: "))
             if len(m_p) > 0:
                 break
-        mx_p = input("Max Price: ")
-        while( len(mx_p) == 0):
-            print('Enter a maximum price!')
-            mx_p = input("Max Price: ")
+        mx_p = input(label("Max Price: "))
+        while(len(mx_p) == 0):
+            print(warnlabel('Enter a maximum price!'))
+            mx_p = input(label("Max Price: "))
             if len(mx_p) > 0:
                 break
         sorted_c_d = []
@@ -57,12 +73,12 @@ def start():
                     sorted_c_d = sort_price('', res)
             if output:
                 write(str(sorted_c_d))
-            print(f'\033[92m{len(sorted_c_d)} Results\033[0m')
+            print(okaylabel(f'{len(sorted_c_d)} Results'))
             pprint(sorted_c_d)
         else:
             return
     except(KeyboardInterrupt) as e:
-        print('\nExiting...')
+        print(okaylabel('\n Exiting...'))
 
 
 def request(url):
@@ -94,6 +110,21 @@ def parse(res):
 
         for l in f_c[1:-2]:
             r = l.findChildren(t, class_="sg-col-inner")
+            o = l.find('a')
+            link = l.find('a', attrs={'href': True})
+            img = l.find('img', attrs={'srcset': True})
+            arrival_date = l.find('span', class_="a-text-bold")
+            try:
+                link_src=[link.attrs['href']]
+                link_url = 'https://www.amazon.com'+link_src[0]
+
+                img_src_set=img.attrs['srcset']
+                src_arr = img_src_set.split(",")
+                img_url = ' '.join(src_arr).split(" ")[0]
+                # img_url = src_arr.split(" ")
+            except(AttributeError ) as e:
+                # print(e)
+                continue
             try:
                 x = r[2].findChildren('span', class_="a-offscreen")
                 for i in x[0]:
@@ -101,8 +132,11 @@ def parse(res):
                         'id': c,
                         'Desc': l.h2.text,
                         'Price': i.string,
+                        'Arrival': arrival_date.string if arrival_date else "----",
                         'Price_Val:': int(
-                            i.string.replace("$", "").replace(".", "").replace(",","")[:-2]),
+                            i.string.replace("$", "").replace(".", "").replace(",", "")[:-2]),
+                        'Image:': img_url,
+                        'Link:' : link_url
                     }
                     c_d.append(o)
                     c += 1
