@@ -1,3 +1,7 @@
 # IceScraper
 
-This is for educational purposes only.
+Scrape Amazon for the prices on an item.
+
+Top results will be stored in a 'results.json' file.
+
+
