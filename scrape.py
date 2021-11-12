@@ -16,7 +16,6 @@ def start():
     pprint(res)
     write(str(res))
 
-
 def request(url):
 
     req_headers = {
