@@ -10,10 +10,14 @@
 <p>Sort Options</p>
 <img src='https://i.ibb.co/Yc2wWts/sortby.png'/>
 
+<p>Choose whether to save the results.</p>
+<img src='https://i.ibb.co/94v3Q8F/saveoutput.png'/>
+
+
 <p>Confirm</p>
 <img src='https://i.ibb.co/Kr3t5jL/confirm.png'/>
 
 <p>Results will be logged.</p>
 <img src='https://i.ibb.co/cwsxZ6v/results.png'/>
-<p>Results will also be stored in a <b>results.json</b> file.</p>
+<p>Saved results in<b>results.json</b> file.</p>
 <img src='https://i.ibb.co/hR4Qdf1/resultsjson.png'/>
