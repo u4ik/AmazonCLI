@@ -13,10 +13,10 @@
 <!-- <p>Choose whether to save the results.</p>
 <img src='https://i.ibb.co/94v3Q8F/saveoutput.png'/> -->
 
-<p>Confirm</p>
+<h3>Confirm</h3>
 <img src='https://i.ibb.co/Kr3t5jL/confirm.png'/> 
 
-<p>Logged results.</p>
+<h3>Logged results.</h3>
 <img src='https://i.ibb.co/rmn1vnq/results.png'/>
 <!-- <p>Saved results in <b>results.json</b>file.</p>
 <img src='https://i.ibb.co/gWYFvwt/resultsjson.png'/> -->
