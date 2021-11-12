@@ -5,42 +5,27 @@ import requests
 import re
 from InquirerPy import prompt
 
-
 def start():
     try:
-        q = input("Search Amazon For: ")
-        
+        q = input("Search Amazon For: ")        
         while( len(q) == 0):
             print('Enter a search term!')
             q = input("Search Amazon For: ")
             if len(q) > 0:
                 break
-
         m_p = input("Min Price: ")
-
         while( len(m_p) == 0):
             print('Enter a minimum price!')
             m_p = input("Min Price: ")
             if len(m_p) > 0:
                 break
-
-
         mx_p = input("Max Price: ")
-
-
         while( len(mx_p) == 0):
             print('Enter a maximum price!')
             mx_p = input("Max Price: ")
             if len(mx_p) > 0:
                 break
-        
-
-
         sorted_c_d = []
-        # q = 'ps5'
-        # m_p = 500
-        # mx_p = 1200
-        
         s_url = f'https://www.amazon.com/s?k={q}&rh=p_36%3A{m_p}00-{mx_p}00'
         resp = request(s_url)
         questions = [
@@ -53,24 +38,17 @@ def start():
                 "message": "Save output file? (results.json):", "name": "output"},
             {"type": "confirm", "message": "Confirm?", "name": "confirm"},
         ]
-
         res = parse(resp)
-
         sorted_c_d = res
-
         sort_result = prompt(questions[0])
         sort = sort_result["sort"]
-
         if sort:
             sort_result = prompt(questions[1])
             sort_choice = sort_result["sortchoice"]
-
         outresult = prompt(questions[2])
         output = outresult["output"]
-
         confirmresult = prompt(questions[-1])
         confirm = confirmresult["confirm"]
-
         if confirm:
             if sort:
                 if sort_choice[0] == "H":
@@ -79,8 +57,8 @@ def start():
                     sorted_c_d = sort_price('', res)
             if output:
                 write(str(sorted_c_d))
+            print(f'\033[92m{len(sorted_c_d)} Results\033[0m')
             pprint(sorted_c_d)
-            pprint(f'{len(sorted_c_d)} Results')
         else:
             return
     except(KeyboardInterrupt) as e:

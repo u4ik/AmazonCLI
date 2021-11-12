@@ -14,6 +14,6 @@
 <img src='https://i.ibb.co/Kr3t5jL/confirm.png'/>
 
 <p>Results will be logged.</p>
-<img src='https://i.ibb.co/bLxxKy8/results.png'/>
+<img src='https://i.ibb.co/cwsxZ6v/results.png'/>
 <p>Results will also be stored in a <b>results.json</b> file.</p>
 <img src='https://i.ibb.co/hR4Qdf1/resultsjson.png'/>
