@@ -25,6 +25,7 @@ def request(url):
     response = requests.get(url, headers=req_headers).text
     return response
 
+
 def parse(res):
     t = 'div'
     c_d = {}
