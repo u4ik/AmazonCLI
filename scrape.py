@@ -28,6 +28,7 @@ def start():
             "message": "Save output file? (results.json):", "name": "output"},
         {"type": "confirm", "message": "Confirm?", "name": "confirm"},
     ]
+    
 
     res = parse(resp)
 
