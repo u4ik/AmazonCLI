@@ -1,4 +1,5 @@
 <h1>Search Amazon Products CLI</h1>
+
 ## Install Python Dependencies
 
 ```bash
