@@ -1,6 +1,6 @@
 {
     "name": "amazon-search-cli",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "```bash\r $ pip install -r requirements.txt\r ```",
     "main": "index.js",
     "scripts": {
@@ -28,6 +28,4 @@
     "bin": {
         "az": "./scrape.py"
     }
-
-
 }
