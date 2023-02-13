@@ -1,3 +1,4 @@
+<h1>Search Amazon Products CLI</h1>
 ## Install Python Dependencies
 
 ```bash
@@ -6,7 +7,6 @@ $ npm i -g amazon-search-cli
 
 ## Usage
 
-<h1>Search Amazon Products CLI</h1>
 <p>Enter a <b>search term</b>.</p>
 <img width=300em src='https://i.ibb.co/X3kTvVd/search-term.png'/>
 <p>Enter a <b>minimum</b> price.</p>
