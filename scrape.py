@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python -B
 from bs4 import BeautifulSoup
 from os import write
 import os
@@ -63,6 +63,9 @@ def start():
         ]
         res = parse(resp)
         sorted_c_d = res
+        if len(sorted_c_d) == 0:
+            print(warnlabel('No Results'))
+            return
         sort_result = prompt(questions[0])
         sort = sort_result["sort"]
         if sort:

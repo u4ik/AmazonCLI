@@ -1,0 +1,23 @@
+{
+  "name": "amazon-search-cli",
+  "version": "1.0.0",
+  "description": "```bash\r $ pip install -r requirements.txt\r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/u4ik/IceScraper.git"
+  },
+  "keywords": [],
+  "author": "u4ik",
+  "license": "ISC",
+  "bin": {
+    "az": "./scrape.py"
+  },
+  "bugs": {
+    "url": "https://github.com/u4ik/IceScraper/issues"
+  },
+  "homepage": "https://github.com/u4ik/IceScraper#readme"
+}
