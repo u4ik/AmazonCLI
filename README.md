@@ -26,9 +26,7 @@ $ npm i -g amazon-search-cli
 <p>Optional sort</p>
 </li>
 <img width=300 src='https://i.ibb.co/LvRpbmz/sortbyprice.png'/>
-<li>
 <p>Sort Options</p>
-</li>
 <img width=300 src='https://i.ibb.co/Yc2wWts/sortby.png'/>
 
 <!-- <p align='center'>
