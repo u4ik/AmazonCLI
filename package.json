@@ -1,31 +1,32 @@
 {
-    "name": "amazon-search-cli",
-    "version": "1.1.0",
-    "description": "```bash\r $ pip install -r requirements.txt\r ```",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/u4ik/AmazonCLI.git"
-    },
-    "bugs": {
-        "url": "https://github.com/u4ik/AmazonCLI/issues"
-    },
-    "homepage": "https://github.com/u4ik/AmazonCLI/blob/main/README.md",
-    "keywords": [
-        "amazon",
-        "npm",
-        "package",
-        "u4ik",
-        "search",
-        "amazonresults",
-        "amazoncli",
-        "amazoncliprompt",
-        "amazonquery"
-    ],
-    "bin": {
-        "az": "./scrape.py"
-    }
+  "name": "amazon-search-cli",
+  "version": "1.1.0",
+  "license": "MIT",
+  "description": "```bash\r $ pip install -r requirements.txt\r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/u4ik/AmazonCLI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/u4ik/AmazonCLI/issues"
+  },
+  "homepage": "https://github.com/u4ik/AmazonCLI/blob/main/README.md",
+  "keywords": [
+    "amazon",
+    "npm",
+    "package",
+    "u4ik",
+    "search",
+    "amazonresults",
+    "amazoncli",
+    "amazoncliprompt",
+    "amazonquery"
+  ],
+  "bin": {
+    "az": "./scrape.py"
+  }
 }
