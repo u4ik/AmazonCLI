@@ -1,7 +1,7 @@
 ## Install Python Dependencies
 
 ```bash
-$ pip install -r requirements.txt
+$ npm i -g amazon-search-cli
 ```
 
 ## Usage
